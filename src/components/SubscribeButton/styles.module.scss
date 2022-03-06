@@ -1,0 +1,21 @@
+$btn-warning: #eba417;
+
+.subscribeButton {
+  height: 4rem;
+  width: 260px;
+  border: 0;
+  border-radius: 2rem;
+  background: $btn-warning;
+  color: var(--gray-900);
+  font-size: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: darken($btn-warning, 10%);
+  }
+}
