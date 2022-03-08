@@ -1,10 +1,35 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { SubscribeButton } from '../components/SubscribeButton'
+import { stripe } from '../services/stripe'
 
 import styles from './home.module.scss'
 
-const Home: NextPage = () => {
+/*
+Client-side rendering - no need for pre-render data (the user rapidly gets the page, but can have a loading component state)
+Server-side rendering (SSR) -  pre-rendering HTML on each request
+Static site generation (SSG) - build time
+
+Example: Blog's post
+
+Post content - uses SSG
+Post Comments - uses client-side 
+
+Although comments could be used SSR, there's no need to get the comentaries as soon as the page
+is loaded, with client-side, it will render the compoents after the page is loaded (Hydration process)
+
+Hydration process - JS loads -> React components are initialized and App becomes interactive
+https://nextjs.org/learn/basics/data-fetching/pre-rendering
+*/
+
+interface HomeProps {
+  product: {
+    priceId: string
+    amount: number
+  }
+}
+
+const Home = ({ product }: HomeProps) => {
   return (
     <>
       <Head>
@@ -18,15 +43,32 @@ const Home: NextPage = () => {
           </h1>
           <p>
             Get access to all the publications <br />
-            <span>for $9.90 month</span>
+            <span>for {product.amount} month</span>
           </p>
-          <SubscribeButton />
+          <SubscribeButton priceId={product.priceId} />
         </section>
 
         <img src="/images/avatar.svg" alt="Girl coding" />
       </main>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const price = await stripe.prices.retrieve('price_1K24gpDUdOkOs6FutpCtGcK2')
+
+  const product = {
+    priceId: price.id,
+    amount: new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(price.unit_amount / 100),
+  }
+
+  return {
+    props: { product },
+    revalidate: 60 * 60 * 24, // 24 hours
+  }
 }
 
 /* 
