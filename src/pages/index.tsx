@@ -16,7 +16,7 @@ Post content - uses SSG
 Post Comments - uses client-side 
 
 Although comments could be used SSR, there's no need to get the comentaries as soon as the page
-is loaded, with client-side, it will render the compoents after the page is loaded (Hydration process)
+is loaded, with client-side it will render the compoents after the page is loaded (Hydration process)
 
 Hydration process - JS loads -> React components are initialized and App becomes interactive
 https://nextjs.org/learn/basics/data-fetching/pre-rendering
@@ -81,16 +81,16 @@ Stripe (payment, has a very helpful API), subscription ->
 
 Github OAuth authentication ->
 
-FaunaDB (this database works very well with serverless applications, like Nextjs),
-other example is DynamoDB, in the DB will be stored subscription data of the user -> 
+FaunaDB (this database works very well with serverless applications, like Nextjs API routes),
+other example is DynamoDB, in the DB will be stored subscription data of the user,
+other great services we have Firebase, Supabase -> 
 
 Prismic CMS - Content managament system - manage the content of a application,
 serve the content of the website (a blog for example) through an API.
 
 serverless - each route in our application will be executed in a isolated environment. Instead of the resource
-being served all the time by the programmer, the cloud provider will instaciate a virtual machine to 
+being served all the time by the programmer, the cloud provider could for example instaciate a virtual machine to 
 serve that resource in a scalable way, all this is handled by the cloud provider, like AWS, Azure, Google Cloud.
-s
 
 */
 
