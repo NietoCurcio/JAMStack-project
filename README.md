@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nextjs - JAMSTACK Project
 
-## Getting Started
+reads:
 
-First, run the development server:
+https://www.netlify.com/jamstack/
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+https://en.wikipedia.org/wiki/Jamstack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://jamstack.org/
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+https://umbraco.com/knowledge-base/jamstack/
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+https://jamstack.wtf/
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## API Routes & Serverless
 
-## Learn More
+### DynamoDB
 
-To learn more about Next.js, take a look at the following resources:
+DynamoDB primary key for a _Table_ can be composed by two attributes, a _Partition key_ and a _Sort key_. One example shown [in the documentation](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html) is that the Music Table uses Artist as the Partition key and SongTitle for Sort Key.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project uses the user email as Partition key and the subscription ID provided by the Stripe API, since an user could have more than a subscription.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+In order to set up the AWS SDK, the [shared credentials file](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/loading-node-credentials-shared.html) was properly configured through an administrator IAM user.
 
-## Deploy on Vercel
+### Stripe
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## SSR and SSG

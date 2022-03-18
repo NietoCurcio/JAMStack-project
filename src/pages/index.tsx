@@ -82,7 +82,8 @@ Stripe (payment, has a very helpful API), subscription ->
 Github OAuth authentication ->
 
 FaunaDB (this database works very well with serverless applications, like Nextjs API routes),
-other example is DynamoDB, in the DB will be stored subscription data of the user,
+other example is DynamoDB which will be used in this code, 
+in the DB will be stored subscription data of the user,
 other great services we have Firebase, Supabase -> 
 
 Prismic CMS - Content managament system - manage the content of a application,
