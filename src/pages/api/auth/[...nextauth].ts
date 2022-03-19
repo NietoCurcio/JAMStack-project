@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
+import { putItemUsers } from '../../../services/dynamodbProvider'
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -10,6 +11,29 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
+  // "Callbacks are asynchronous functions you can use to control what happens when an action is performed"
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html#Expressions.ConditionExpressions.PreventingOverwrites
+      const params = {
+        TableName: 'Users',
+        Item: {
+          email: { S: user.email },
+          subscriptionId: { S: `${null}` },
+          subscriptionStatus: { S: 'not subscribed' },
+        },
+        ConditionExpression: 'attribute_not_exists(email)',
+      }
+
+      try {
+        await putItemUsers(params)
+        return true
+      } catch (error) {
+        console.log(error)
+        return false
+      }
+    },
+  },
 })
 
 /*

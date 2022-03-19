@@ -11,9 +11,6 @@ https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.Read
 */
 
 /*
-likewise we could have more than one songTitle for an artist, we could have more than one subscription
-for an email
-
 also a good read - https://www.alexdebrie.com/posts/dynamodb-one-to-many/
 */
 
@@ -25,7 +22,7 @@ export const params = {
     },
     // Number of attributes in KeySchema should match number of attributes defined in AttributeDefinitions
     {
-      AttributeName: 'subscription_stripe',
+      AttributeName: 'subscriptionId',
       AttributeType: 'S',
     },
   ],
@@ -39,7 +36,7 @@ export const params = {
     when creating through console we can define only one partition key and one sort key for RANGE
     */
     {
-      AttributeName: 'subscription_stripe',
+      AttributeName: 'subscriptionId',
       KeyType: 'RANGE',
     },
   ],
