@@ -39,21 +39,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         name: session.user.name,
       })
 
-      const puItemParams = {
+      const updateItemParams = {
         TableName: 'Users',
         Key: {
           email: { S: session.user.email },
           subscriptionId: { S: `${null}` },
         },
-        UpdateExpression: 'SET customerId = :c, subscriptionStatus = :s',
+        ExpressionAttributeNames: { '#t': 'time' }, // time is a reserved keyword
+        UpdateExpression:
+          'SET customerId = :c, subscriptionStatus = :s, #t = :t',
         ExpressionAttributeValues: {
           ':c': { S: stripeCustomer.id },
-          ':s': { S: 'to be subscribed' },
+          ':s': { S: 'about to become a subscriber' },
+          ':t': { S: new Date().toISOString() },
         },
         ReturnValues: 'ALL_NEW',
       }
 
-      await updateItemUsers(puItemParams)
+      await updateItemUsers(updateItemParams)
 
       customerId = stripeCustomer.id
     }

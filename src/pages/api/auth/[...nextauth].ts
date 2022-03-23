@@ -20,7 +20,7 @@ export default NextAuth({
         Item: {
           email: { S: user.email },
           subscriptionId: { S: `${null}` },
-          subscriptionStatus: { S: 'not subscribed' },
+          subscriptionStatus: { S: 'non subscriber' },
         },
         ConditionExpression: 'attribute_not_exists(email)',
       }
