@@ -22,6 +22,12 @@ This project uses the user email as Partition key and the subscription ID provid
 
 In order to set up the AWS SDK, the [shared credentials file](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/loading-node-credentials-shared.html) was properly configured through an administrator IAM user.
 
+### Serverless
+
+Quote from AWS:
+
+"With DynamoDB, there are no servers to provision, patch, or manage, and no software to install, maintain, or operate. DynamoDB automatically scales tables to adjust for capacity and maintains performance with zero administration. Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities."
+
 ## Stripe
 
 Stripe is a service for online payment, in this project there's one product, that is the monthly subscription. When the user subscribes it's created a customer. The projec also make uso webhooks through Next.js API Routes, then Stripe is able to send real-time events to the application and handle the events accorndangly, for example send an event that a subscription is not active anymore.
@@ -36,11 +42,11 @@ Since serverless functions runs on server-side, [next-auth](https://next-auth.js
 
 Next.js is optimized for SEO, since it pre-renders the HTML of the pages. There are two forms of [pre-rendering](https://nextjs.org/learn/basics/data-fetching/two-forms):
 
-- SSR (Server-side Rendering): the HTML is generated on each request, useful for when we need to pre-render data that gets updated frequently or when we cannot pre-render a page ahead of a user's request. It's also possible to build static pages using Dynamic Routes with "getStaticPaths".
+- SSR (Server-side Rendering): the HTML is generated on each request, useful for when we need to pre-render data that gets updated frequently or when we cannot pre-render a page ahead of a user's request.
 
-- SSG (Static site Generation): the HTML is generated at build time, this makes it much faster than SSR, it is useful when we can pre-render a page ahead of user request, i.e. it's static content available for all users.
+- SSG (Static site Generation): the HTML is generated at build time, this makes it much faster than SSR, it is useful when we can pre-render a page ahead of user request, i.e. it's static content available for all users. Next.js will make use of getStaticPaths and getStaticProps to build the static pages, it will follow the "paths" and "fallback" parameters returned in the [getStaticPaths](https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details) to generate static pages with dynamic routes.
 
-Since nextjs uses pre-rendering, so it's optimized to be indexed in google (the Googlebots or Google's web crawlers will get the page with content).
+Since nextjs uses pre-rendering, it's optimized to be indexed in google (the Googlebots or Google's web crawlers will get the page with content). By default Next.js pre-renders the pages into static HTML.
 
 ### Content Management System (CMS)
 
@@ -53,9 +59,3 @@ Since nextjs uses pre-rendering, so it's optimized to be indexed in google (the 
 ## Rocketseat Ignite
 
 I studied this project during the ReactJS Ignite by [Rockeseat](https://www.rocketseat.com.br/), in 2022. I received the opportunity for a scholarship and I am very grateful for it. The original project lectured in the course uses [FaunaDB](https://fauna.com/), instead of [DynamoDB](https://aws.amazon.com/dynamodb/), I decided to use the Amazon Severless Database to learn how to use it and put personal touch in the project, since it also works very well for serverless applications.
-
-Quote from AWS:
-
-Serverless
-
-With DynamoDB, there are no servers to provision, patch, or manage, and no software to install, maintain, or operate. DynamoDB automatically scales tables to adjust for capacity and maintains performance with zero administration. Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
