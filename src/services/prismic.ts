@@ -20,8 +20,9 @@ export function linkResolver(doc) {
 }
 
 interface configProps {
-  accessToken: string
-  previewData: any
+  accessToken?: string
+  previewData?: any
+  req?: any
 }
 
 // This factory function allows smooth preview setup
@@ -33,6 +34,7 @@ export function createClient(config: configProps) {
   enableAutoPreviews({
     client,
     previewData: config.previewData,
+    req: config.req,
   })
 
   return client

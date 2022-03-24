@@ -1,6 +1,6 @@
 # Nextjs - JAMSTACK Project
 
-> A JAMSTack project that uses the DynamoDB serverless database, Stripe online payment service and Prismic CMS.
+> A JAMSTack project that uses the DynamoDB serverless database, Stripe online payment service and Prismic CMS. It's a blog with content for subscribed users.
 
 <p align="center">
 <img width="750" src=".github/home.png" alt="JAMStack project">
@@ -51,6 +51,8 @@ Next.js is optimized for SEO, since it pre-renders the HTML of the pages. There 
 Since Nextjs uses pre-rendering, it's optimized to be indexed in google (the Googlebots or Google's web crawlers will get the page with content). By default Next.js pre-renders the pages into static HTML.
 
 ### Content Management System (CMS)
+
+With Prismic.io headless CMS we can manage the content of our blog, we are also able to preview an unpublished post with Prismic and Next.js integration.
 
 ## Application flow
 
