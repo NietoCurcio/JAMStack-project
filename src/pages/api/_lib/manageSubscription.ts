@@ -24,8 +24,6 @@ export async function saveSubscription(
     return newest - oldest
   })
 
-  console.log(user)
-
   const subscription = await stripe.subscriptions.retrieve(subscriptionId)
 
   /* we cannot update any primary key, actually we must create a new one

@@ -1,9 +1,6 @@
-import { Console } from 'console'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import {
-  getItemUsers,
-  putItemUsers,
   queryItemUsers,
   updateItemUsers,
 } from '../../services/dynamodbProvider'

@@ -1,6 +1,9 @@
-import NextAuth from 'next-auth'
+import NextAuth, { getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
-import { putItemUsers } from '../../../services/dynamodbProvider'
+import {
+  putItemUsers,
+  queryItemUsers,
+} from '../../../services/dynamodbProvider'
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -13,6 +16,27 @@ export default NextAuth({
   ],
   // "Callbacks are asynchronous functions you can use to control what happens when an action is performed"
   callbacks: {
+    async session({ session }) {
+      // query an user by email email and his subscription it's active
+      const queryItemParams = {
+        TableName: 'Users',
+        KeyConditionExpression: 'email = :e',
+        FilterExpression: 'subscriptionStatus = :s',
+        ProjectionExpression: 'subscriptionStatus',
+        ExpressionAttributeValues: {
+          ':e': { S: session.user.email },
+          ':s': { S: 'active' },
+        },
+      }
+
+      const {
+        Items: [item],
+      } = await queryItemUsers(queryItemParams)
+
+      const userActiveSubscription = item ? item.subscriptionStatus.S : null
+
+      return { ...session, activeSubscription: userActiveSubscription }
+    },
     async signIn({ user, account, profile, email, credentials }) {
       // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html#Expressions.ConditionExpressions.PreventingOverwrites
       const params = {
