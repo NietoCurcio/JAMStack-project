@@ -1,10 +1,14 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { DescribeTableCommand } from '@aws-sdk/client-dynamodb'
 import { ListTablesCommand } from '@aws-sdk/client-dynamodb'
+import { fromIni } from '@aws-sdk/credential-provider-ini'
 
 const REGION = 'us-east-1'
 
-export const ddbClient = new DynamoDBClient({ region: REGION })
+export const ddbClient = new DynamoDBClient({
+  region: REGION,
+  credentials: fromIni({ profile: 'default' }),
+})
 
 export const describeTable = async () => {
   try {
