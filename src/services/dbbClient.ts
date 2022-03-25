@@ -7,7 +7,12 @@ const REGION = 'us-east-1'
 
 export const ddbClient = new DynamoDBClient({
   region: REGION,
-  credentials: fromIni({ profile: 'default' }),
+  // credentials: fromIni({ profile: 'default' }),
+  credentials: {
+    accessKeyId: process.env.DDB_ACCESS,
+    secretAccessKey: process.env.DDB_SECRET,
+    sessionToken: undefined,
+  },
 })
 
 export const describeTable = async () => {
