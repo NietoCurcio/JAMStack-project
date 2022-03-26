@@ -63,3 +63,7 @@ With Prismic.io headless CMS we can manage the content of our blog, we are also 
 ## Rocketseat Ignite
 
 I studied this project during the ReactJS Ignite by [Rockeseat](https://www.rocketseat.com.br/), in 2022. I received the opportunity for a scholarship and I am very grateful for it. The original project lectured in the course uses [FaunaDB](https://fauna.com/), instead of [DynamoDB](https://aws.amazon.com/dynamodb/), I decided to use the Amazon Serverless Database to learn how to use it and put personal touch in the project, since it also works very well for serverless applications.
+
+## Vercel Deploy
+
+https://jamstack-mu.vercel.app/
